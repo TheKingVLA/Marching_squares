@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <script>
+            var canvas_width = 600;
+            var canvas_height = 600;
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.canvas.width = canvas_width;
+            ctx.canvas.height = canvas_height;
+            ctx.fillStyle = "grey";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            var resolution = 20;
+            
+            // Initialize the field array
+            var field = [];
+            var rows = canvas_height / resolution
+            var cols = canvas_width / resolution;
+            for (var i = 0; i <= cols; i++) {
+                field[i] = [];
+                for (var j = 0; j <= rows; j++) {
+                    field[i][j] = Math.floor(Math.random() * 2);
+                    ctx.beginPath();
+                    ctx.arc(i * resolution, j * resolution, 3, 0, 2 * Math.PI);
+                    ctx.fillStyle = "rgb(" + 255*field[i][j]+ "," + 255*field[i][j] + "," + 255*field[i][j] + ")";
+                    ctx.fill();
+                }
+            }
+
+            for (var i = 0; i < cols ; i++) {
+                for (var j = 0; j < rows ; j++) {
+                    var a_x = i * resolution + 0.5 * resolution;
+                    var a_y = j * resolution;
+                    var b_x = i * resolution + resolution;
+                    var b_y = j * resolution + 0.5 * resolution;
+                    var c_x = i * resolution + 0.5 * resolution; 
+                    var c_y = j * resolution + resolution;
+                    var d_x = i * resolution;
+                    var d_y = j * resolution + 0.5 * resolution;
+                    act_on_case(field[i][j],field[i+1][j],field[i+1][j+1],field[i][j+1])
+                    
+                    
+                }
+            }
+
+            function act_on_case(e, f, g, h){
+                case_nr = e * 8 + f * 4 + g * 2 + h * 1;
+                console.log(case_nr);
+                ctx.beginPath();
+                switch(case_nr){
+                    case 0: 
+                        break;
+                    case 1:
+                        ctx.moveTo(c_x, c_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 2:
+                        ctx.moveTo(b_x, b_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 3:
+                        ctx.moveTo(b_x, b_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 4:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(b_x, b_y);
+                        break;
+                    case 5:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(d_x, d_y);
+                        ctx.moveTo(b_x, b_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 6:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 7:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 8:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 9:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 10:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(b_x, b_y);
+                        ctx.moveTo(d_x, d_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 11:
+                        ctx.moveTo(a_x, a_y);
+                        ctx.lineTo(b_x, b_y);
+                        break;
+                    case 12:
+                        ctx.moveTo(b_x, b_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 13:
+                        ctx.moveTo(b_x, b_y);
+                        ctx.lineTo(c_x, c_y);
+                        break;
+                    case 14:
+                        ctx.moveTo(c_x, c_y);
+                        ctx.lineTo(d_x, d_y);
+                        break;
+                    case 15:
+                        break;
+
+                        
+                }
+                
+                ctx.stroke();
+            }
+
+        </script>
+    </body>
+</html>
